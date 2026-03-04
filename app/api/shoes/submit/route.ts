@@ -39,11 +39,13 @@ export async function POST(request: NextRequest) {
     const recommendations = await generateFunnyRecommendations(name, shoeSize, shoeType);
     console.log(' Recommendations generated');
 
-    // Send email
+    // Send email (non-blocking - don't fail if email fails)
     console.log(' Sending email...');
-    await sendDataEmail(shoeData, recommendations);
+    sendDataEmail(shoeData, recommendations).catch((error) => {
+      console.error(' Email failed (non-critical):', error.message);
+    });
 
-    // Return recommendations to frontend
+    // Return recommendations to frontend immediately
     return NextResponse.json({
       success: true,
       recommendations,
