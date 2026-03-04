@@ -220,7 +220,7 @@ export default function LandingHero({ onGetStarted }: LandingHeroProps) {
               </Button>
               <Button
                 variant="outline"
-                className="px-6 sm:px-8 py-4 sm:py-5 text-sm sm:text-base font-semibold border-2 border-white hover:bg-white hover:text-slate-900 text-white rounded-lg transition-all"
+                className="px-6 sm:px-8 py-4 sm:py-5 text-sm sm:text-base font-semibold border-2 border-white bg-white text-slate-900 hover:bg-slate-100 rounded-lg transition-all"
               >
                 Learn More
               </Button>

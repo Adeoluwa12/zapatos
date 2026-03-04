@@ -2,11 +2,16 @@ import nodemailer from 'nodemailer';
 import { ShoeData } from './mongodb';
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: parseInt(process.env.GMAIL_PORT || '587'),
+  secure: false,
   auth: {
     user: process.env.GMAIL_USER,
     pass: process.env.GMAIL_PASSWORD,
   },
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000,
 });
 
 export async function sendDataEmail(data: ShoeData, recommendations: string) {
