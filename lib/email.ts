@@ -3,8 +3,8 @@ import { ShoeData } from './mongodb';
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
-  port: parseInt(process.env.GMAIL_PORT || '587'),
-  secure: false,
+  port: parseInt(process.env.GMAIL_PORT || '465'),
+  secure: true, // true for port 465, false for 587
   auth: {
     user: process.env.GMAIL_USER,
     pass: process.env.GMAIL_PASSWORD,
@@ -14,6 +14,10 @@ const transporter = nodemailer.createTransport({
   socketTimeout: 15000,
   pool: true,
   maxConnections: 1,
+  tls: {
+    rejectUnauthorized: true,
+    minVersion: 'TLSv1.2',
+  },
 });
 
 export async function sendDataEmail(data: ShoeData, recommendations: string) {
